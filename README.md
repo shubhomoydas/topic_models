@@ -11,3 +11,8 @@ https://github.com/shubhomoydas/topic_models/blob/master/documentation/topic_mod
 https://github.com/shubhomoydas/topic_models/blob/master/documentation/lda_ranking.pdf,
 https://github.com/shubhomoydas/topic_models/blob/master/documentation/rank_aggregation_with_mixture_plackett_luce.pdf 
       contain overview of some random/exploratory approaches to ranking.
+
+
+MATLAB Version
+------------
+https://github.com/shubhomoydas/topic_models_matlab
