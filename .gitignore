@@ -1,0 +1,8 @@
+*~
+/Debug
+/Release
+.DS_Store
+*.o
+*.exe
+*.dll
+*.stackdump
