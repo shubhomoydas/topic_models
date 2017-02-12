@@ -20,6 +20,6 @@ https://github.com/shubhomoydas/topic_models_matlab
 
 Mixture of Plackett-Luce Distributions
 ------------
-Documentation for C++ version of PL mixtures is at: https://github.com/shubhomoydas/ranking_PL/blob/master/documentation/rank_aggregation_with_mixture_plackett_luce.pdf
+Documentation for PL mixtures is at: https://github.com/shubhomoydas/ranking_PL/blob/master/documentation/rank_aggregation_with_mixture_plackett_luce.pdf
 
 MATLAB version of this is at: https://github.com/shubhomoydas/ranking_PL
