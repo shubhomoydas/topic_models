@@ -98,24 +98,23 @@ int _main( int argc, char** argv )
 	options.time = true;
 	if (options.data_file.empty()) {
 		if (options.sparse) {
-			options.data_file = "C:/smd/git/repository/ADAMS/code/TopicModel_C/sampledata/data_true_multinomial-sparse.csv";
+			options.data_file = "git/topic_models/sampledata/data_true_multinomial-sparse.csv";
 			if (options.vocab_file.empty()) {
-				options.vocab_file = "C:/smd/git/repository/ADAMS/code/TopicModel_C/sampledata/data_true_multinomial-vocab.csv";
+				options.vocab_file = "git/topic_models/sampledata/data_true_multinomial-vocab.csv";
 			}
 		} else {
-			options.data_file = "C:/smd/git/repository/ADAMS/code/TopicModel_C/sampledata/data_true_multinomial.csv";
-			//options.data_file = "C:/smd/ADAMS/experiments/gmm/synthetic/ensembles/data-anomalies-ranked-bulk.csv";
+			options.data_file = "git/topic_models/sampledata/data_true_multinomial.csv";
 			options.skip_left_cols = 1;
 		}
 	}
 	if (options.thetas_file.empty()) {
-		options.thetas_file = "C:/smd/ADAMS/experiments/lda/synthetic_data_thetas.csv";
+		options.thetas_file = "experiments/lda/synthetic_data_thetas.csv";
 	}
 	if (options.taus_file.empty()) {
-		options.taus_file = "C:/smd/ADAMS/experiments/lda/synthetic_data_taus.csv";
+		options.taus_file = "experiments/lda/synthetic_data_taus.csv";
 	}
 	if (options.pis_file.empty()) {
-		options.pis_file = "C:/smd/ADAMS/experiments/lda/synthetic_data_pis.csv";
+		options.pis_file = "experiments/lda/synthetic_data_pis.csv";
 	}
 	if (options.debug) std::cout << "Loading data from file: " << options.data_file << std::endl;
 

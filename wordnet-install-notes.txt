@@ -1,0 +1,68 @@
+
+# Create Directory /scratch/wordnet/local
+
+
+
+After install, following message was displayed:
+
+<message>
+
+WordNet is now configured
+
+  Installation directory:               /scratch/wordnet/local
+
+  To build and install WordNet:
+
+    make
+    make install
+
+  To run, environment variables should be set as follows:
+
+    PATH - include ${exec_prefix}/bin
+    WNHOME - if not using default installation location, set to /scratch/wordnet/local
+
+    See INSTALL file for details and additional environment variables
+    which may need to be set on your system.
+
+</message>
+
+set environment variable
+------------------------
+#set WNHOME=/scratch/wordnet/local/WordNet-3.0
+set PATH=/scratch/wordnet/local/bin:$PATH
+
+# Without the following, Wordnet::QueryData fails to install
+setenv WNHOME /scratch/wordnet/local/WordNet-3.0
+
+Install Text::Similarity
+------------------------
+Download Text::Similarity from http://search.cpan.org/dist/Text-Similarity/lib/Text/Similarity.pm
+Extract to /scratch/wordnet/Text-Similarity-0.10
+
+perl Makefile.PL PREFIX=/scratch/wordnet/local/TextSimilarity-0.10 LIB=/scratch/wordnet/local/perl-lib
+
+make
+make test
+make install
+
+Install WordNet-QueryData-1.49
+-------------------------------
+perl Makefile.PL
+make
+make test
+# Note: DO NOT RUN make install. Instead, install in custom folder
+mkdir /scratch/wordnet/local/perl-lib/WordNet
+cp QueryData.pm /scratch/wordnet/local/perl-lib/WordNet
+
+Install WordNet-Similarity-2.05
+-------------------------------
+# Set perl lib path
+setenv PERL5LIB /scratch/wordnet/local/perl-lib
+perl Makefile.PL LIB=/scratch/wordnet/local/perl-lib PREFIX=/scratch/wordnet/local/WordNet-Similarity-2.05
+
+make
+make test
+make install
+
+
+

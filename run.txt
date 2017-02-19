@@ -1,0 +1,50 @@
+
+# Run on laptop
+cd git/topic_models/Release
+
+topicmodel -file "git/topic_models/sampledata/data_true_multinomial.csv" -topics 2 -thetasfile "temp/experiments/lda/synthetic_data_thetas_T2.csv" -tausfile "temp/experiments/lda/synthetic_data_taus_T2.csv" -debug
+
+topicmodel -file "git/topic_models/sampledata/data_true_multinomial.csv" -topics 3 -thetasfile "temp/experiments/lda/synthetic_data_thetas_T3.csv" -tausfile "temp/experiments/lda/synthetic_data_taus_T3.csv" -debug
+
+topicmodel -file "git/topic_models/sampledata/data_true_multinomial.csv" -topics 4 -thetasfile "temp/experiments/lda/synthetic_data_thetas_T4.csv" -tausfile "temp/experiments/lda/synthetic_data_taus_T4.csv" -debug
+
+topicmodel -file "git/topic_models/sampledata/data_true_multinomial.csv" -topics 5 -thetasfile "temp/experiments/lda/synthetic_data_thetas_T5.csv" -tausfile "temp/experiments/lda/synthetic_data_taus_T5.csv" -debug
+
+topicmodel -file "git/topic_models/sampledata/data_true_multinomial.csv" -topics 6 -thetasfile "temp/experiments/lda/synthetic_data_thetas_T6.csv" -tausfile "temp/experiments/lda/synthetic_data_taus_T6.csv" -debug
+
+topicmodel -file "git/topic_models/sampledata/data_true_multinomial.csv" -topics 10 -thetasfile "temp/experiments/lda/synthetic_data_thetas_T10.csv" -tausfile "temp/experiments/lda/synthetic_data_taus_T10.csv" -debug
+
+# Run on desktop
+
+nbLDA -file "data/MATLAB-data/fv_data_anom_user_5.csv" -topics 3 -thetasfile "results/lda/fv_data_anom_user_5_thetas_T3.csv" -epochs 500 -tausfile "results/lda/fv_data_anom_user_5_taus_T3.csv" -debug
+
+#### R A N K I N G ####
+
+# Run LDA MEAN ranking
+topicmodel -file "../sampledata/sample_ranking_input.csv" -skiptoprows 1 -skipleftcols 1 -topics 2 -epochs 50 -prefixcols 1 -rank.maxvotes 50 -rank.consensustype 1 -rank.cutofffraction 0.5 -rank.file "temp/results/ranked/ranked.csv" -thetasfile "temp/results/ranked/thetas.csv" -tausfile "temp/results/ranked/taus.csv" -rank.consensusfile "temp/results/ranked/consensus.csv" -debug -time > "temp/results/ranked/debug.txt"
+
+# Run LDA MAX ranking
+topicmodel -file "../sampledata/sample_ranking_input.csv" -skiptoprows 1 -skipleftcols 1 -topics 2 -epochs 50 -prefixcols 1 -rank.maxvotes 50 -rank.consensustype 2 -rank.cutofffraction 0.5 -rank.file "temp/results/ranked/ranked.csv" -thetasfile "temp/results/ranked/thetas.csv" -tausfile "temp/results/ranked/taus.csv" -rank.consensusfile "temp/results/ranked/consensus.csv" -debug -time > "temp/results/ranked/debug.txt"
+
+# Run SIMPLE ranking
+topicmodel -file "../sampledata/sample_ranking_input.csv" -skiptoprows 1 -skipleftcols 1 -topics 2 -epochs 50 -prefixcols 1 -rank.maxvotes 50 -rank.consensustype 0 -rank.cutofffraction 0.5 -rank.file "temp/results/ranked/ranked.csv" -thetasfile "temp/results/ranked/thetas.csv" -tausfile "temp/results/ranked/taus.csv" -rank.consensusfile "temp/results/ranked/consensus.csv" -debug -time > "temp/results/ranked/debug.txt"
+
+#######################
+
+dir /b temp/results/abalone > temp/results/abalone.txt
+
+# Run with sparse data
+
+# Simple LDA
+topicmodel -file "git/topic_models/sampledata/data_true_multinomial-sparse.csv" -vocab "git/topic_models/sampledata/data_true_multinomial-vocab.csv" -sparse -usegroupids -topics 3 -lda 0 -epochs 50 -numholdout 100 -logfromepoch 20000 -thetasfile "temp/experiments/lda/synthetic_data_thetas.csv" -tausfile "temp/experiments/lda/synthetic_data_taus.csv" -debug -time -randomize -randseed 42 > "temp/experiments/lda/debug.txt"
+
+# MultinomialNB LDA
+topicmodel -file "git/topic_models/sampledata/data_true_multinomial-sparse.csv" -vocab "git/topic_models/sampledata/data_true_multinomial-vocab.csv" -sparse -usegroupids -topics 3 -lda 1 -epochs 50 -logfromepoch 20000 -thetasfile "temp/experiments/lda/synthetic_data_thetas.csv" -tausfile "temp/experiments/lda/synthetic_data_taus.csv" -debug -time -randomize -randseed 42 > "temp/experiments/lda/debug.txt"
+
+# GroupedMultinomialNB LDA
+topicmodel -file "git/topic_models/sampledata/data_true_multinomial-sparse.csv" -vocab "git/topic_models/sampledata/data_true_multinomial-vocab.csv" -sparse -usegroupids -topics 3 -lda 2 -epochs 50 -logfromepoch 20000 -thetasfile "temp/experiments/lda/synthetic_data_thetas.csv" -tausfile "temp/experiments/lda/synthetic_data_taus.csv" -pisfile "temp/experiments/lda/synthetic_data_pis.csv" -debug -time -randomize -randseed 42 > "temp/experiments/lda/debug.txt"
+
+topicmodel -file "git/topic_models/sampledata/data_true_multinomial-sparse.csv" -vocab "git/topic_models/sampledata/data_true_multinomial-vocab.csv" -sparse -usegroupids -topics 3 -lda 2 -epochs 50 -logfromepoch 20000 -thetasfile "temp/experiments/lda/synthetic_data_thetas.csv" -tausfile "temp/experiments/lda/synthetic_data_taus.csv" -pisfile "temp/experiments/lda/synthetic_data_pis.csv" -debug -time -randomize -randseed 41 > "temp/experiments/lda/debug.txt"
+
+# GroupedMultinomialNB LDA inferring groups
+topicmodel -file "git/topic_models/sampledata/data_true_multinomial-sparse.csv" -vocab "git/topic_models/sampledata/data_true_multinomial-vocab.csv" -sparse -topics 3 -groups 3 -lda 2 -epochs 50 -logfromepoch 20000 -thetasfile "temp/experiments/lda/synthetic_data_thetas.csv" -tausfile "temp/experiments/lda/synthetic_data_taus.csv" -pisfile "temp/experiments/lda/synthetic_data_pis.csv" -groupsfile "temp/experiments/lda/synthetic_data_groups.csv" -debug -time -randomize -randseed 41 > "temp/experiments/lda/debug.txt"

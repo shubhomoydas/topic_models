@@ -1,0 +1,121 @@
+
+README
+------
+
+Following is the sequence of operations for pre-processing twitter data:
+
+1. Basic preprocessing (removing special chars, separate handles/hashtags) and identify user communications
+
+perl filter_tweets.pl
+
+Input Files:
+  - training.1600000.processed.noemoticon.csv
+  - training-filtered-users.csv
+
+Generated Files:
+  - training-msgs.csv
+  - training-user-references.csv
+
+2. Figure out all user communities
+
+perl explore_networks.pl
+
+Input Files:
+  - training-user-references.csv
+
+Generated Files:
+  - training-user-communications.csv
+  - training-user-communication-counts.csv
+  - training-user-groups.csv
+
+3. Remove all stopwords from pre-processed tweets
+
+perl remove_stopwords.pl
+
+Input Files:
+  - stopwords.txt
+  - training-msgs.csv
+
+Generated Files:
+  - training-msgs-without-stopwords.csv
+
+4. Get a subset of groups which have desired min size
+
+perl filter_groups.pl
+
+Notes:
+  - The program output:
+    total group records loaded: 175314
+
+Input Files:
+  - training-user-groups.csv
+
+Generated Files:
+  - training-filtered-groups.csv
+
+5. Filter the twitter messages by the users to be retained according to filtered groups
+
+perl filter_tweets_for_groups.pl
+
+Notes:
+  - Program output:
+    total group records loaded: 333
+    total user records loaded: 78590
+
+Input Files:
+  - training-filtered-groups.csv
+  - training-msgs-without-stopwords.csv
+
+Generated Files:
+  - training-msgs-group-filtered.csv
+  - training-msgs-user-counts.csv
+
+6. Generate the vocabulary that assigns an integer index [0 - ...] to each word.
+
+perl generate_vocab.pl
+
+Notes:
+  - Upon loading the set of messages, summary output:
+    Loaded Vocab. Len=126689...
+    
+  - We filter out all words that have not appeared less than 60 times in the corpus
+    We are then left with 4904 unique words in the vocabulary
+
+Input Files:
+  - training-msgs-group-filtered.csv
+
+Generated Files:
+  - vocab.csv
+
+7. Prepare the feature vectors and apply the vocab filter
+
+perl generate_feature_vectors.pl
+
+Notes:
+  - Following summary was output in last run:
+    Total Docs: 437088, Total word count: 1371943, Avg words/doc: 3.1388255911853
+
+Input Files:
+  - vocab.csv
+  - training-msgs-group-filtered.csv
+
+Generated Files:
+  - feature-vectors.csv
+  - group-vector-counts.csv
+  - user-vector-counts.csv
+  - verify-user-vector-counts.csv
+
+8. Analyze the number of connections in each group
+
+perl analyze_groups.pl
+
+Notes:
+  - Following summary was output in last run:
+    Total Docs: 437088, Total word count: 1371943, Avg words/doc: 3.1388255911853
+
+Input Files:
+  - training-user-communications.csv
+  - training-filtered-groups.csv
+
+Generated Files:
+  - group-communication-counts.csv

@@ -1,0 +1,37 @@
+
+# path to Twitter data: /scratch/TwitterData/parsed/featurevectors
+# /scratch/TwitterData/parsed/featurevectors/feature-vectors.csv
+# /scratch/TwitterData/parsed/featurevectors/vocab.csv
+#
+# Output Folders
+# /scratch/TwitterData/lda-runs
+# /scratch/TwitterData/lda-runs/lda-0-1
+
+# Run with sparse data
+
+# Simple LDA
+rm -f /scratch/TwitterData/lda-runs/lda-0-1/debug.txt
+./topicmodel.exe -file "/scratch/TwitterData/parsed/featurevectors/feature-vectors.csv" -vocab "/scratch/TwitterData/parsed/featurevectors/vocab.csv" -sparse -usegroupids -topics 100 -lda 0 -epochs 4000 -logfromepoch 3951 -tausfile "/scratch/TwitterData/lda-runs/lda-0-1/taus.csv" -debug -time -randomize -randseed 42 > "/scratch/TwitterData/lda-runs/lda-0-1/debug.txt"
+
+rm -f /scratch/TwitterData/lda-runs/lda-0-2/debug.txt
+./topicmodel.exe -file "/scratch/TwitterData/parsed/featurevectors/feature-vectors.csv" -vocab "/scratch/TwitterData/parsed/featurevectors/vocab.csv" -sparse -usegroupids -topics 100 -lda 0 -epochs 4000 -logfromepoch 3951 -tausfile "/scratch/TwitterData/lda-runs/lda-0-2/taus.csv" -debug -time -randomize -randseed 41 > "/scratch/TwitterData/lda-runs/lda-0-2/debug.txt"
+
+
+# MultinomialNB LDA
+rm -f /scratch/TwitterData/lda-runs/lda-1-1/debug.txt
+./topicmodel.exe -file "/scratch/TwitterData/parsed/featurevectors/feature-vectors.csv" -vocab "/scratch/TwitterData/parsed/featurevectors/vocab.csv" -sparse -usegroupids -topics 100 -lda 1 -epochs 4000 -logfromepoch 3951 -tausfile "/scratch/TwitterData/lda-runs/lda-1-1/taus.csv" -debug -time -randomize -randseed 42 > "/scratch/TwitterData/lda-runs/lda-1-1/debug.txt"
+
+rm -f /scratch/TwitterData/lda-runs/lda-1-2/debug.txt
+./topicmodel.exe -file "/scratch/TwitterData/parsed/featurevectors/feature-vectors.csv" -vocab "/scratch/TwitterData/parsed/featurevectors/vocab.csv" -sparse -usegroupids -topics 100 -lda 1 -epochs 4000 -logfromepoch 3951 -tausfile "/scratch/TwitterData/lda-runs/lda-1-2/taus.csv" -debug -time -randomize -randseed 41 > "/scratch/TwitterData/lda-runs/lda-1-2/debug.txt"
+
+
+# GroupedMultinomialNB LDA
+rm -f /scratch/TwitterData/lda-runs/lda-2-1/debug.txt
+./topicmodel.exe -file "/scratch/TwitterData/parsed/featurevectors/feature-vectors.csv" -vocab "/scratch/TwitterData/parsed/featurevectors/vocab.csv" -sparse -usegroupids -topics 100 -lda 2 -epochs 1 -logfromepoch 3951 -tausfile "/scratch/TwitterData/lda-runs/lda-2-1/taus.csv" -pisfile "/scratch/TwitterData/lda-runs/lda-2-1/pis.csv" -debug -time -randomize -randseed 42 > "/scratch/TwitterData/lda-runs/lda-2-1/debug.txt"
+
+rm -f /scratch/TwitterData/lda-runs/lda-2-2/debug.txt
+./topicmodel.exe -file "/scratch/TwitterData/parsed/featurevectors/feature-vectors.csv" -vocab "/scratch/TwitterData/parsed/featurevectors/vocab.csv" -sparse -usegroupids -topics 100 -lda 2 -epochs 4000 -logfromepoch 3951 -tausfile "/scratch/TwitterData/lda-runs/lda-2-2/taus.csv" -pisfile "/scratch/TwitterData/lda-runs/lda-2-2/pis.csv" -debug -time -randomize -randseed 42 > "/scratch/TwitterData/lda-runs/lda-2-2/debug.txt"
+
+rm -f /scratch/TwitterData/lda-runs/lda-2-1-inferGroups/debug.txt
+./topicmodel.exe -file "/scratch/TwitterData/parsed/featurevectors/feature-vectors-4.csv" -vocab "/scratch/TwitterData/parsed/featurevectors/vocab.csv" -sparse -topics 100 -groups 25 -lda 2 -epochs 50 -logfromepoch 3951 -tausfile "/scratch/TwitterData/lda-runs/lda-2-1-inferGroups/taus.csv" -pisfile "/scratch/TwitterData/lda-runs/lda-2-1-inferGroups/pis.csv" -debug -time -randomize -randseed 42 > "/scratch/TwitterData/lda-runs/lda-2-1-inferGroups/debug.txt"
+
